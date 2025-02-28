@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import List, Optional, Tuple
 
-from gitingest.utils import async_timeout
+from sdkingest.utils import async_timeout
 
 TIMEOUT: int = 60
 

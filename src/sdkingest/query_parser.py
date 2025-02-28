@@ -10,10 +10,10 @@ from pathlib import Path
 from typing import List, Optional, Set, Tuple, Union
 from urllib.parse import unquote, urlparse
 
-from gitingest.config import MAX_FILE_SIZE, TMP_BASE_PATH
-from gitingest.exceptions import InvalidPatternError
-from gitingest.ignore_patterns import DEFAULT_IGNORE_PATTERNS
-from gitingest.repository_clone import CloneConfig, _check_repo_exists, fetch_remote_branch_list
+from sdkingest.config import MAX_FILE_SIZE, TMP_BASE_PATH
+from sdkingest.exceptions import InvalidPatternError
+from sdkingest.ignore_patterns import DEFAULT_IGNORE_PATTERNS
+from sdkingest.repository_clone import CloneConfig, _check_repo_exists, fetch_remote_branch_list
 
 HEX_DIGITS: Set[str] = set(string.hexdigits)
 

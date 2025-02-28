@@ -1,4 +1,4 @@
-""" Custom exceptions for the Gitingest package. """
+""" Custom exceptions for the SDKIngest package. """
 
 
 class InvalidPatternError(ValueError):

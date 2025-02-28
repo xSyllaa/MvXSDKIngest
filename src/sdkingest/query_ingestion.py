@@ -11,15 +11,15 @@ from typing import Any, Dict, List, Optional, Set, Tuple, Union
 import tiktoken
 import tomli
 
-from gitingest.config import MAX_DIRECTORY_DEPTH, MAX_FILES, MAX_TOTAL_SIZE_BYTES
-from gitingest.exceptions import (
+from sdkingest.config import MAX_DIRECTORY_DEPTH, MAX_FILES, MAX_TOTAL_SIZE_BYTES
+from sdkingest.exceptions import (
     AlreadyVisitedError,
     InvalidNotebookError,
     MaxFileSizeReachedError,
     MaxFilesReachedError,
 )
-from gitingest.notebook_utils import process_notebook
-from gitingest.query_parser import ParsedQuery
+from sdkingest.notebook_utils import process_notebook
+from sdkingest.query_parser import ParsedQuery
 
 try:
     locale.setlocale(locale.LC_ALL, "")
@@ -901,15 +901,15 @@ def run_ingest_query(query: ParsedQuery) -> Tuple[str, str, str]:
     if query.type and query.type == "blob":
         return _ingest_single_file(path, query)
 
-    apply_gitingest_file(path, query)
+    apply_sdkingest_file(path, query)
     return _ingest_directory(path, query)
 
 
-def apply_gitingest_file(path: Path, query: ParsedQuery) -> None:
+def apply_sdkingest_file(path: Path, query: ParsedQuery) -> None:
     """
-    Apply the .gitingest file to the query object.
+    Apply the .sdkingest file to the query object.
 
-    This function reads the .gitingest file in the specified path and updates the query object with the ignore
+    This function reads the .sdkingest file in the specified path and updates the query object with the ignore
     patterns found in the file.
 
     Parameters
@@ -920,16 +920,16 @@ def apply_gitingest_file(path: Path, query: ParsedQuery) -> None:
         The parsed query object containing information about the repository and query parameters.
         It should have an attribute `ignore_patterns` which is either None or a set of strings.
     """
-    path_gitingest = path / ".gitingest"
+    path_sdkingest = path / ".sdkingest"
 
-    if not path_gitingest.is_file():
+    if not path_sdkingest.is_file():
         return
 
     try:
-        with path_gitingest.open("rb") as f:
+        with path_sdkingest.open("rb") as f:
             data = tomli.load(f)
     except tomli.TOMLDecodeError as exc:
-        warnings.warn(f"Invalid TOML in {path_gitingest}: {exc}", UserWarning)
+        warnings.warn(f"Invalid TOML in {path_sdkingest}: {exc}", UserWarning)
         return
 
     config_section = data.get("config", {})
@@ -944,7 +944,7 @@ def apply_gitingest_file(path: Path, query: ParsedQuery) -> None:
 
     if not isinstance(ignore_patterns, (list, set)):
         warnings.warn(
-            f"Expected a list/set for 'ignore_patterns', got {type(ignore_patterns)} in {path_gitingest}. Skipping.",
+            f"Expected a list/set for 'ignore_patterns', got {type(ignore_patterns)} in {path_sdkingest}. Skipping.",
             UserWarning,
         )
         return

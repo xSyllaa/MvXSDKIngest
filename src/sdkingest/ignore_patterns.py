@@ -1,4 +1,4 @@
-""" Default ignore patterns for Gitingest. """
+""" Default ignore patterns for SDKingest. """
 
 from typing import Set
 

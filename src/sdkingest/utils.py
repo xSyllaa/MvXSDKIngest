@@ -1,10 +1,10 @@
-""" Utility functions for the Gitingest package. """
+""" Utility functions for the SDKingest package. """
 
 import asyncio
 import functools
 from typing import Any, Awaitable, Callable, TypeVar
 
-from gitingest.exceptions import AsyncTimeoutError
+from sdkingest.exceptions import AsyncTimeoutError
 
 T = TypeVar("T")
 

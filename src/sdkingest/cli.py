@@ -1,4 +1,4 @@
-""" Command-line interface for the Gitingest package. """
+""" Command-line interface for the SDKIngest package. """
 
 # pylint: disable=no-value-for-parameter
 
@@ -7,8 +7,8 @@ from typing import Optional, Tuple
 
 import click
 
-from gitingest.config import MAX_FILE_SIZE, OUTPUT_FILE_PATH
-from gitingest.repository_ingest import ingest_async
+from sdkingest.config import MAX_FILE_SIZE, OUTPUT_FILE_PATH
+from sdkingest.repository_ingest import ingest_async
 
 
 @click.command()
